@@ -1,0 +1,12 @@
+/* 暗色主题下的组件级微调（配合 element-theme.css 的 html.dark 覆盖） */
+html.dark body {
+  color-scheme: dark;
+}
+
+html.dark .card {
+  box-shadow: none;
+}
+
+html.dark ::selection {
+  background: rgba(57, 135, 229, 0.35);
+}
