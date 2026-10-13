@@ -91,14 +91,41 @@
       </div>
     </div>
 
-    <ContentResultPanel :result="contentStore.result" />
+    <!-- 团购：左侧文案 / 右侧图片 -->
+    <div v-if="!isVideo && contentStore.result" class="card gb-result">
+      <div class="gb-head">
+        <h3 class="gb-head-title">生成结果</h3>
+        <div class="gb-actions">
+          <el-button type="success" :icon="Promotion" @click="onPublish">一键发布</el-button>
+          <el-button type="info" :icon="Download" @click="onExport">导出</el-button>
+        </div>
+      </div>
+      <div class="gb-body">
+        <div class="gb-copy">
+          <div v-for="b in contentStore.result.blocks" :key="b.label" class="gb-block">
+            <span class="gb-label">{{ b.label }}</span>
+            <p class="gb-text">{{ b.text }}</p>
+          </div>
+        </div>
+        <div class="gb-images">
+          <div class="gb-img-grid">
+            <div v-for="img in GROUP_BUY_IMAGES" :key="img" class="gb-img">
+              <el-image :src="img" :preview-src-list="GROUP_BUY_IMAGES" fit="cover" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 视频：分镜表 -->
+    <ContentResultPanel v-else :result="contentStore.result" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { MagicStick, CopyDocument, Lightning, ArrowUp, ArrowDown, ChatDotRound } from '@element-plus/icons-vue'
-import { ElMessage } from 'element-plus'
+import { MagicStick, CopyDocument, Lightning, ArrowUp, ArrowDown, ChatDotRound, Promotion, Download } from '@element-plus/icons-vue'
+import { ElMessage, ElMessageBox } from 'element-plus'
 import ContentResultPanel from '@/components/business/ContentResultPanel.vue'
 import { useAppStore } from '@/stores/app'
 import { useStoreStore } from '@/stores/store'
@@ -111,7 +138,11 @@ const appStore = useAppStore()
 const storeStore = useStoreStore()
 const contentStore = useContentStore()
 
-const prompt = ref('')
+const prompt = ref(
+  props.type === 'video'
+    ? '春熙路老火锅：新店开业引流短视频，突出沸腾牛油锅底、空运鲜毛肚七上八下脆嫩化渣、门店排队人气爆棚，引导到店核销团购优惠。'
+    : '蔬八戒手擀面：每日现擀手擀面筋道爽滑，招牌凉菜现拌现做爽口开胃，突出限时秒杀高性价比，画面诱人。'
+)
 const activeTab = ref('common')
 const showNotice = ref(true)
 const assocInfo = ref(true)
@@ -119,6 +150,9 @@ const personaInfo = ref(false)
 
 const isVideo = computed(() => props.type === 'video')
 const currentStore = computed(() => storeStore.getById(appStore.currentStoreId))
+
+/** 团购套餐：默认素材图（仅第一张） */
+const GROUP_BUY_IMAGES = ['/images/food-1.jpg']
 
 const tabs = computed(() =>
   isVideo.value
@@ -191,6 +225,23 @@ async function onGenerate() {
     prompt: prompt.value.trim(),
   })
   ElMessage.success('内容生成完成')
+}
+
+async function onPublish() {
+  try {
+    await ElMessageBox.confirm('是否同步发布到抖音 / 小红书？', '一键发布', {
+      confirmButtonText: '确认发布',
+      cancelButtonText: '取消',
+      type: 'warning',
+    })
+    ElMessage.success('已提交发布（演示）')
+  } catch {
+    /* 用户取消发布 */
+  }
+}
+
+function onExport() {
+  ElMessage.success('已导出txt文件')
 }
 </script>
 
@@ -443,6 +494,84 @@ html.dark .notice {
   background: rgba(0, 0, 0, 0.2);
   padding: 2px 8px;
   border-radius: 999px;
+}
+/* 团购结果：左文案 / 右图片 */
+.gb-result {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.gb-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.gb-head-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+}
+.gb-actions {
+  display: flex;
+  gap: 12px;
+}
+.gb-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+.gb-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.gb-block {
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+.gb-label {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--brand-500);
+  margin-bottom: 6px;
+}
+.gb-text {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--text-color);
+}
+.gb-images {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.gb-img-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+.gb-img {
+  aspect-ratio: 4 / 3;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  background: var(--bg-color);
+}
+.gb-img :deep(.el-image) {
+  width: 100%;
+  height: 100%;
+}
+@media (max-width: 900px) {
+  .gb-body {
+    grid-template-columns: 1fr;
+  }
 }
 @media (max-width: 640px) {
   .generate-btn {
