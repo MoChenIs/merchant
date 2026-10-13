@@ -2,7 +2,6 @@
   <div class="app-shell">
     <AppSidebar />
     <div class="app-main">
-      <AppTopbar />
       <main class="app-content custom-scrollbar">
         <router-view />
       </main>
@@ -13,7 +12,6 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import AppSidebar from './AppSidebar.vue'
-import AppTopbar from './AppTopbar.vue'
 import { useStoreStore } from '@/stores/store'
 import { useAppStore } from '@/stores/app'
 
@@ -45,7 +43,7 @@ onMounted(async () => {
 .app-content {
   flex: 1;
   overflow-y: auto;
-  padding: 32px;
+  padding: 20px 32px;
   background: var(--bg-color);
 }
 </style>

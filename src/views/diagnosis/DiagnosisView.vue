@@ -43,6 +43,12 @@
       </div>
       <DiagnosisReport :diagnosis="report" />
     </div>
+
+    <div v-else class="card empty-card">
+      <el-icon class="empty-icon" :size="36"><DataAnalysis /></el-icon>
+      <div class="empty-title">请点击「开始 AI 诊断」</div>
+      <div class="empty-sub">选择门店后，AI 将生成多维度经营诊断报告</div>
+    </div>
   </div>
 </template>
 
@@ -195,5 +201,26 @@ async function startDiagnose() {
   font-size: 16px;
   font-weight: 700;
   margin: 0;
+}
+.empty-card {
+  padding: 120px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-align: center;
+}
+.empty-icon {
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+.empty-title {
+  font-size: 15px;
+  font-weight: 600;
+}
+.empty-sub {
+  font-size: 13px;
+  color: var(--text-secondary);
 }
 </style>

@@ -22,7 +22,7 @@ function render() {
 
   chart.setOption({
     tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
-    grid: { top: 20, right: 20, bottom: 20, left: 40, containLabel: true },
+    grid: { top: 16, right: 20, bottom: 0, left: 40, containLabel: true },
     xAxis: {
       type: 'category',
       data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
@@ -74,7 +74,7 @@ watch(
 
 <style scoped>
 .chart {
-  height: 320px;
+  height: 264px;
   width: 100%;
 }
 </style>

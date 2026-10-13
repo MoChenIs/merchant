@@ -236,9 +236,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { UploadFilled, MagicStick, Delete, Download, Refresh, CopyDocument, Picture } from '@element-plus/icons-vue'
 import { ElMessage } from 'element-plus'
+import { useContentStore } from '@/stores/content'
 
 /** 系统默认三张图片（位于 public/images） */
 const RESULT_IMAGES = [
@@ -288,8 +289,14 @@ const uploadImages = ref<string[]>([])
 const sellingPoints = ref('')
 const selectedSample = ref('hotpot')
 const generating = ref(false)
-const generated = ref(false)
 const progress = ref(0)
+
+const contentStore = useContentStore()
+/** 持久化生成状态，避免切换模块后结果被清空 */
+const generated = computed({
+  get: () => contentStore.xhsGenerated,
+  set: (v: boolean) => contentStore.setXhsGenerated(v),
+})
 
 function onFileChange(e: Event) {
   const files = (e.target as HTMLInputElement).files

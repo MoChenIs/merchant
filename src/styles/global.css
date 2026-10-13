@@ -65,12 +65,12 @@ a {
 .page {
   max-width: 1200px;
   margin: 0 auto;
-  padding-bottom: 48px;
+  padding-bottom: 24px;
 }
 .page-sm {
   max-width: 960px;
   margin: 0 auto;
-  padding-bottom: 48px;
+  padding-bottom: 24px;
 }
 
 /* 标题 */

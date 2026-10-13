@@ -34,7 +34,7 @@ const deltaIcon = computed(() => (props.deltaType === 'up' ? Top : Warning))
 
 <style scoped>
 .stat-card {
-  padding: 24px;
+  padding: 20px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -45,9 +45,9 @@ const deltaIcon = computed(() => (props.deltaType === 'up' ? Top : Warning))
   color: var(--text-secondary);
 }
 .stat-value {
-  font-size: 30px;
+  font-size: 28px;
   font-weight: 700;
-  margin-top: 8px;
+  margin-top: 6px;
   letter-spacing: -0.02em;
 }
 .stat-delta {
@@ -65,9 +65,9 @@ const deltaIcon = computed(() => (props.deltaType === 'up' ? Top : Warning))
   color: #f59e0b;
 }
 .stat-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;

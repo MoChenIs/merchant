@@ -91,27 +91,27 @@ const pendingCount = computed(() => appStore.todos.filter((t) => !t.done).length
 .dashboard {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 16px;
 }
 .stats {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+  gap: 16px;
 }
 .lower {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  gap: 32px;
+  gap: 20px;
   align-items: stretch;
 }
 .chart-card {
-  padding: 24px;
+  padding: 20px;
 }
 .chart-head {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
   gap: 16px;
   flex-wrap: wrap;
 }
@@ -126,7 +126,7 @@ const pendingCount = computed(() => appStore.todos.filter((t) => !t.done).length
   margin: 4px 0 0;
 }
 .side-card {
-  padding: 24px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
 }
@@ -134,12 +134,12 @@ const pendingCount = computed(() => appStore.todos.filter((t) => !t.done).length
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 16px;
+  margin-bottom: 10px;
 }
 .act-head {
   border-top: 1px solid var(--border-color);
-  padding-top: 20px;
-  margin-top: 24px;
+  padding-top: 12px;
+  margin-top: 16px;
 }
 .side-title {
   font-size: 16px;
@@ -149,13 +149,13 @@ const pendingCount = computed(() => appStore.todos.filter((t) => !t.done).length
 .todos {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 .todo {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px 12px;
+  gap: 8px;
+  padding: 8px 10px;
   border-radius: 10px;
   background: var(--bg-color);
   border: 1px solid var(--border-color);
@@ -185,12 +185,12 @@ const pendingCount = computed(() => appStore.todos.filter((t) => !t.done).length
 .activities {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 8px;
 }
 .activity {
   display: flex;
   align-items: flex-start;
-  gap: 10px;
+  gap: 8px;
   font-size: 12px;
 }
 .activity-dot {

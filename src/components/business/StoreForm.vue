@@ -38,7 +38,7 @@
 
     <div class="section">
       <h3 class="form-section-title">2. 经营情况</h3>
-      <div class="grid-2">
+      <div class="grid-3">
         <div class="field">
           <label class="field-label">月营业额评估</label>
           <el-input v-model="form.monthlyRevenue" placeholder="如：约 ¥45 万" />
@@ -47,11 +47,11 @@
           <label class="field-label">日常客流</label>
           <el-input v-model="form.dailyTraffic" placeholder="如：工作日 180 / 周末 320" />
         </div>
-        <div class="field span-2">
+        <div class="field">
           <label class="field-label">主要客群</label>
           <el-input v-model="form.targetAudience" placeholder="如：18–35 岁 · 情侣与朋友聚餐" />
         </div>
-        <div class="field span-2">
+        <div class="field span-3">
           <label class="field-label">当前主要问题</label>
           <el-input
             v-model="form.currentProblem"
@@ -182,6 +182,9 @@ watch(cityValue, (codes) => {
 .field.span-2 {
   grid-column: span 2;
 }
+.field.span-3 {
+  grid-column: span 3;
+}
 .field-label {
   font-size: 13px;
   color: var(--text-secondary);
@@ -198,13 +201,17 @@ watch(cityValue, (codes) => {
   .grid-3 {
     grid-template-columns: repeat(2, 1fr);
   }
+  .field.span-3 {
+    grid-column: span 2;
+  }
 }
 @media (max-width: 900px) {
   .grid-2,
   .grid-3 {
     grid-template-columns: 1fr;
   }
-  .field.span-2 {
+  .field.span-2,
+  .field.span-3 {
     grid-column: span 1;
   }
 }

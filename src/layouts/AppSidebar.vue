@@ -24,6 +24,7 @@
         <div class="user-name">运营总监-张</div>
         <div class="user-role">VIP 旗舰版</div>
       </div>
+      <ThemeToggle />
     </div>
   </aside>
 </template>
@@ -41,6 +42,7 @@ import {
   Help,
 } from '@element-plus/icons-vue'
 import BrandLogo from '@/components/layout/BrandLogo.vue'
+import ThemeToggle from '@/components/common/ThemeToggle.vue'
 
 interface NavItem {
   path: string
@@ -160,6 +162,7 @@ function isActive(item: NavItem): boolean {
 }
 .user-meta {
   overflow: hidden;
+  flex: 1;
 }
 .user-name {
   font-size: 14px;

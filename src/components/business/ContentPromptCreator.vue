@@ -92,7 +92,7 @@
     </div>
 
     <!-- 团购：左侧文案 / 右侧图片 -->
-    <div v-if="!isVideo && contentStore.result" class="card gb-result">
+    <div v-if="!isVideo && result" class="card gb-result">
       <div class="gb-head">
         <h3 class="gb-head-title">生成结果</h3>
         <div class="gb-actions">
@@ -102,7 +102,7 @@
       </div>
       <div class="gb-body">
         <div class="gb-copy">
-          <div v-for="b in contentStore.result.blocks" :key="b.label" class="gb-block">
+          <div v-for="b in result.blocks" :key="b.label" class="gb-block">
             <span class="gb-label">{{ b.label }}</span>
             <p class="gb-text">{{ b.text }}</p>
           </div>
@@ -118,7 +118,7 @@
     </div>
 
     <!-- 视频：分镜表 -->
-    <ContentResultPanel v-else :result="contentStore.result" />
+    <ContentResultPanel v-else :result="result" />
   </div>
 </template>
 
@@ -149,6 +149,7 @@ const assocInfo = ref(true)
 const personaInfo = ref(false)
 
 const isVideo = computed(() => props.type === 'video')
+const result = computed(() => contentStore.resultOf(props.type))
 const currentStore = computed(() => storeStore.getById(appStore.currentStoreId))
 
 /** 团购套餐：默认素材图（仅第一张） */
